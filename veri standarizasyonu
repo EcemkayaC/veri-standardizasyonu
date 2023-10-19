@@ -1,0 +1,23 @@
+import numpy as np
+import seaborn as sns 
+df = sns.load_dataset('tips')
+print(df)
+
+""" 0-1 dönüşümü """
+from sklearn.preprocessing import LabelEncoder
+lbe = LabelEncoder()
+print(lbe.fit_transform(df["sex"]))
+df["yeni_sex"] = lbe.fit_transform(df["sex"]) """bu dönüşümü kalıcı olarak veri setine ekledik. """
+print(df)
+
+
+""" "1 ve diğerleri (0)" dönüşümü """
+df["yeni_day"] = np.where(df["day"].str.contains("Sun"), 1, 0) """ day değişkeninin içindeki sun verilerinin hepsine 1 değerini diğerlerine 0 değerini atadığımız yeni bir değişken yarattık. """
+print(df)
+
+
+""" çok sınıflı dönüşüm """
+from sklearn.preprocessing import LabelEncoder
+lbe = LabelEncoder()
+lbe.fit_transform(df["day"])
+print(df["day"])
